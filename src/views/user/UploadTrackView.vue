@@ -81,7 +81,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, nextTick, watch } from 'vue';
+  import { ref, onMounted, nextTick, computed, watch } from 'vue';
   import Cropper from 'cropperjs';
   import 'cropperjs/dist/cropper.css';
   import { useAuthStore } from '../../store/authStore';
