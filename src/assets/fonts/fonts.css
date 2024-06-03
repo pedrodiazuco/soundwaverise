@@ -1,0 +1,36 @@
+
+/* importaciones tipografías */
+@font-face {
+  font-family: 'Raleway';
+  src: url('Raleway-Medium.ttf') format('truetype');
+  font-weight: medium;
+  font-style: medium;
+}
+
+@font-face {
+  font-family: 'Anton-Regular';
+  src: url('Anton-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: url('Poppins-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITC-Avant-Garde-Gothic-LT-Bold';
+  src: url('ITC-Avant-Garde-Gothic-LT-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
