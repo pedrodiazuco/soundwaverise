@@ -263,11 +263,10 @@ const setAudioFile = async (event) => {
     errorMessage.value = 'Por favor, selecciona un archivo de audio.';
     return;
   }
-
-  const fileName = trackTitle.value + '_audio.mp3';
+  const audioName = trackTitle.value + '_audio.mp3';
   console.log(fileName);
   // Crear un nuevo objeto File a partir del Blob comprimido
-  const audioFileCreated  = new File([fileImported], fileName, { type: "audio/mp3" });
+  const audioFileCreated  = new File([fileImported], audioName, { type: "audio/mp3" });
   // Establecer la imagen comprimida en el estado
   audioFile.value = URL.createObjectURL(audioFileCreated);
   // Guardar el archivo para su posterior uso en la carga

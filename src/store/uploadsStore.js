@@ -21,7 +21,7 @@ export const useUploadsStore = defineStore({
         console.log('URL en uploadProfilePhoto: ' + response.data.publicImageUrl);
         this.errorMessage = '';
         return response.data.publicImageUrl;  // Suponemos que el backend devuelve la URL de la imagen subida
-      } 
+      }
       catch (error) {
         console.error('Error al subir la foto de perfil:', error);
         if (error?.response) {
