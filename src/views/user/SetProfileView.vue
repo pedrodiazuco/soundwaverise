@@ -186,7 +186,7 @@ const onSelectFile = (event) => {
 //COGE LA IMAGEN RECORTADA, LA COMPRIME Y LA CONVIERTE EN UN OBJETO
 const cropImage = () => {
   const fileName = currentUser.value.nickname + '_profileImage.png'; // Usaremos el mismo nombre de archivo para la imagen recortada y comprimida
-  console.log(fileName);
+  console.log('nombre de la imagen: '+ fileName);
 
   if (!cropper.value || !cropper.value.getCroppedCanvas) {
     console.error('El objeto cropper value no está definido o no tiene el método getCroppedCanvas.');
