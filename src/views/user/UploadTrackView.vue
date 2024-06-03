@@ -264,7 +264,7 @@ const setAudioFile = async (event) => {
     return;
   }
   const audioName = trackTitle.value + '_audio.mp3';
-  console.log(fileName);
+  console.log(audioName);
   // Crear un nuevo objeto File a partir del Blob comprimido
   const audioFileCreated  = new File([fileImported], audioName, { type: "audio/mp3" });
   // Establecer la imagen comprimida en el estado
