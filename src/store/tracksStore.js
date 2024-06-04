@@ -274,6 +274,32 @@ export const useTracksStore = defineStore({
         return false;
       }
     }
+  },
+
+  /*------ DESCARGAR EL TRACK ------*/
+  async downloadTrack(track_id) {
+    try {
+        const response = await axios.get(`/download/${track_id}`, {
+            responseType: 'blob', // Importante para manejar la respuesta como un blob
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${response.headers['x-suggested-filename']}`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } 
+    catch (error) {
+        console.error('Error al descargar el track:', error);
+        if (error?.response) {
+          this.errorMessage = error.response.data.message;
+        }
+        else {
+          this.errorMessage = 'Error al descargar el track. Inténtelo de nuevo más tarde.';
+        }
+    }
   }
+
 
 });

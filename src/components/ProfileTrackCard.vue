@@ -176,17 +176,8 @@ const handleDownloadBtn = () => {
         errorMessage.value = 'Debes dar me gusta y comentar para descargar el track.';
         return;
     }
-    downloadTrack(props.track.audio_url, props.track.title);
+    tracksStore.downloadTrack(props.track.id);
 }
-
-const downloadTrack = (audioUrl, title) => {
-    const downloadLink = document.createElement('a');
-    downloadLink.href = audioUrl;
-    downloadLink.download = `${title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`; // Sanitize title to use as filename
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-};
 
 const formatTime = time => {
     const minutes = Math.floor(time / 60);
