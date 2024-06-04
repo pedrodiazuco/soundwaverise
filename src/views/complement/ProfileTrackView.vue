@@ -324,6 +324,7 @@ const signOut = () => {
     margin-bottom: 10px;
 }
 .description {
+    white-space: pre-wrap;
     padding: 10px 10px 0px 10px;
     display: flex;
     flex-direction: column;
@@ -422,6 +423,7 @@ const signOut = () => {
     margin-bottom: 2px; /* Espacio entre el nombre del usuario y el comentario */
 }
 .comment-description {
+    white-space: pre-wrap;
     font-family: 'Poppins';
     font-size: 15px;
     padding-left: 15px;

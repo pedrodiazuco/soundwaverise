@@ -313,7 +313,7 @@
   color: rgb(255, 255, 255);
   font-size: 14px;
   font-family: 'Poppins', sans-serif;
-  text-align: justify; /* Justifica el texto de la biografía */
+  text-align: justify;
 }
 
 .edit-bio-container {
