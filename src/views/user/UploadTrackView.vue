@@ -18,7 +18,7 @@
           <!-- Caja para la imagen sin recortar -->
           <div v-if="!croppedImage" class="cropped-track-image">
             <div class="file-upload">
-              <input type="file" id="file" @change="onSelectImgFile" accept="image/*" hidden>
+              <input type="file" id="file" @change="onSelectImgFile" accept="image/*" :disabled="!trackTitle" hidden>
               <label for="file" class="upload-btn">Subir imagen del track</label>
             </div>
             <div v-if="imageSrc">
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <div class="track-title" for="trackTitle">Añade un archivo de audio:</div>
-              <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*">
+              <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*" :disabled="!trackTitle">
             </div>
             <div class="form-group">
               <select id="trackGenre" v-model="selectedGenre" class="select-genre">
@@ -235,7 +235,6 @@ watch(() => user.value ? user.value.photo_url : '', (newVal, oldVal) => {
             quality -= 0.1;
           }
         }
-  
         // Crear un nuevo objeto File a partir del Blob comprimido
         const file = new File([blob], imageName, { type: "image/jpeg" });
         // Establecer la imagen comprimida en el estado
