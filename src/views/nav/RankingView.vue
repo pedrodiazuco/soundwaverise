@@ -38,6 +38,14 @@ const authStore = useAuthStore();
 // Computed para verificar si el usuario está logueado
 const isUserLoggedIn = computed(() => !!authStore.currentUser);
 
+watch(errorMessage, (newValue) => {
+    if (newValue) {
+            setTimeout(() => {
+            errorMessage.value = '';
+        }, 1500);
+    }
+});
+
 const goToSignIn = () => {
   router.push("/signIn");
 };

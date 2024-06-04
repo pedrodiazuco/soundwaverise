@@ -63,11 +63,10 @@
 
 <script setup>
 import { onMounted, computed, watch, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useTracksStore } from '../../store/tracksStore';
 import { useAuthStore } from '../../store/authStore';
 import ProfileTrackCard from '../../components/ProfileTrackCard.vue';
-import { useUsersStore } from '../../store/usersStore';
 
 const emit = defineEmits(['commentAdded']);
 
