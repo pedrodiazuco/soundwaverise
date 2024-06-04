@@ -28,7 +28,7 @@
     
 <script setup>
 import { useRouter } from "vue-router";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useAuthStore } from "../../store/authStore";
 import RankingTrackList from "../../components/RankingTracksList.vue";
 
