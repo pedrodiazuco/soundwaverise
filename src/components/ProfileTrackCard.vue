@@ -186,8 +186,9 @@ const downloadFileName = computed(() => {
 
 const downloadTrack = () => {
     const link = document.createElement('a');
-    link.href = props.track.audio_url;
-    link.download = downloadFileName.value || 'download';  // Asegúrate de que downloadFileName sea una ref o reactive para que sea reactivo
+    link.href = props.track.audio_url; // Asegúrate de que la URL está correctamente especificada
+    link.download = downloadFileName.value || 'download'; // Utiliza un nombre de archivo seguro
+    link.target = '_blank'; // Esto abrirá la descarga en una nueva pestaña
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
