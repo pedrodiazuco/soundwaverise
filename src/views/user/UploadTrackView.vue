@@ -622,6 +622,11 @@ const uploadTrackSubmit = async () => {
   cursor: not-allowed;
 }
 
+.disabled-btn {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .error-popup {
   position: fixed;
   top: 50%;
