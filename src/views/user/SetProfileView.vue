@@ -281,7 +281,8 @@ const setProfileSubmit = async () => {
 
     if (usersStore.errorMessage) {
       errorMessage.value = usersStore.errorMessage;
-    } else if (authStore.currentUser.role === "superAdmin"){
+    }
+    else if (authStore.currentUser.role === "superAdmin"){
       router.push(`/profile/${currentUser.value.nickname}`);
     }
     else {
