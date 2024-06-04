@@ -11,12 +11,12 @@
     <div class="uploadTrack-card">
         <div class="card-info">
           <!-- Caja para la imagen ya recortada -->
-          <div v-if="croppedImage & trackTitle">
+          <div v-if="croppedImage">
             <img :src="croppedImage" class="cropped-track-image" alt="Cropped Image">
             <<button @click="changeImage" class="change-image-btn">Cambiar Imagen</button>
           </div>
           <!-- Caja para la imagen sin recortar -->
-          <div v-if="!croppedImage & trackTitle" class="cropped-track-image">
+          <div v-if="!croppedImage" class="cropped-track-image">
             <div class="file-upload">
               <input type="file" id="file" @change="onSelectImgFile" accept="image/*" :disabled="!trackTitle" hidden>
               <label for="file" class="upload-btn">Subir imagen del track</label>
@@ -48,7 +48,7 @@
                   placeholder= "Introduce una descripción">
                 </textarea>
             </div>
-            <div v-if="trackTitle" class="form-group">
+            <div class="form-group">
               <div class="track-title" for="trackTitle">Añade un archivo de audio:</div>
               <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*" :disabled="!trackTitle">
             </div>
@@ -204,7 +204,7 @@ watch(() => user.value ? user.value.photo_url : '', (newVal, oldVal) => {
   };
   //COGE LA IMAGEN RECORTADA, LA COMPRIME Y LA CONVIERTE EN UN OBJETO
   const cropImage = () => {
-    const imageName = trackTitle.value + '_cover.png'; // Usaremos el mismo nombre de archivo para la imagen recortada y comprimida
+    const imageName = uuidv4() + '_cover.png'; // Usaremos el mismo nombre de archivo para la imagen recortada y comprimida
     if (!cropper.value || !cropper.value.getCroppedCanvas) {
       console.error('El objeto cropper.value no está definido o no tiene el método getCroppedCanvas.');
       return;
@@ -262,7 +262,7 @@ const setAudioFile = async (event) => {
     errorMessage.value = 'Por favor, selecciona un archivo de audio.';
     return;
   }
-  const audioName = trackTitle.value + '_audio.mp3';
+  const audioName = uuidv4() + '_audio.mp3';
   console.log(audioName);
   // Crear un nuevo objeto File a partir del Blob comprimido
   const audioFileCreated  = new File([fileImported], audioName, { type: "audio/mp3" });
