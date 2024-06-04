@@ -169,7 +169,7 @@ const goToSignUp = () => {
 };
 
 const goToProfile = () => {
-    router.push(`/${currentUser.nickanme}`);
+    router.push(`/${currentUser.value.nickanme}`);
 };
 
 const signOut = () => {

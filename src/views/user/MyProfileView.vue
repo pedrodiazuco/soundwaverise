@@ -202,10 +202,10 @@
     transform: scale(1.05);
     background-color: #333;
 }
-.profile-button:hover {
+.upload-track-button:hover {
     transition: all .5s;
     transform: scale(1.05);
-    background-color: #333;
+    background-color: #216723;
 }
 .signout-button:hover {
     transition: all .5s;
