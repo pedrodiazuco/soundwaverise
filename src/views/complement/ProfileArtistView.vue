@@ -485,7 +485,8 @@ const goToSetProfile = () => {
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 .edit-bio-btn:hover {
-        background-color: #548c32;
+        transition: all .5s;
+        transform: scale(1.05);
 }
 
 .error-popup {
