@@ -204,7 +204,7 @@ watch(() => user.value ? user.value.photo_url : '', (newVal, oldVal) => {
   };
   //COGE LA IMAGEN RECORTADA, LA COMPRIME Y LA CONVIERTE EN UN OBJETO
   const cropImage = () => {
-    const fileName = trackTitle.value + '_cover.png'; // Usaremos el mismo nombre de archivo para la imagen recortada y comprimida
+    const imageName = trackTitle.value + '_cover.png'; // Usaremos el mismo nombre de archivo para la imagen recortada y comprimida
     if (!cropper.value || !cropper.value.getCroppedCanvas) {
       console.error('El objeto cropper.value no está definido o no tiene el método getCroppedCanvas.');
       return;
@@ -237,7 +237,7 @@ watch(() => user.value ? user.value.photo_url : '', (newVal, oldVal) => {
         }
   
         // Crear un nuevo objeto File a partir del Blob comprimido
-        const file = new File([blob], fileName, { type: "image/jpeg" });
+        const file = new File([blob], imageName, { type: "image/jpeg" });
         // Establecer la imagen comprimida en el estado
         croppedImage.value = URL.createObjectURL(file);
         // Guardar el archivo para su posterior uso en la carga
