@@ -143,17 +143,24 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
-
 .login-button:hover {
+    transition: all .5s;
+    transform: scale(1.05);
     background-color: #333;
 }
 .register-button:hover {
+    transition: all .5s;
+    transform: scale(1.05);
     background-color: #333;
 }
 .profile-button:hover {
+    transition: all .5s;
+    transform: scale(1.05);
     background-color: #333;
 }
 .signout-button:hover {
+    transition: all .5s;
+    transform: scale(1.05);
     background-color: #681c1c;
 }
 

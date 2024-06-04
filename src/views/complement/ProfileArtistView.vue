@@ -220,6 +220,7 @@ const goToSetProfile = () => {
         margin-bottom: 25px;
         background-color: black;
         font-size: 17px;
+        font-family: 'Raleway', sans-serif;
         color: white;
         padding: 10px 30px;
         border: none;
@@ -233,6 +234,7 @@ const goToSetProfile = () => {
         margin-bottom: 25px;
         background-color: black;
         font-size: 17px;
+        font-family: 'Raleway', sans-serif;
         color: white;
         padding: 10px 30px;
         border: none;
@@ -246,6 +248,7 @@ const goToSetProfile = () => {
         margin-bottom: 25px;
         background-color: black;
         font-size: 17px;
+        font-family: 'Raleway', sans-serif;
         color: white;
         padding: 10px 70px;
         border: none;
@@ -259,6 +262,7 @@ const goToSetProfile = () => {
         margin-bottom: 25px;
         background-color: black;
         font-size: 17px;
+        font-family: 'Raleway', sans-serif;
         color: white;
         padding: 10px 20px;
         border: none;

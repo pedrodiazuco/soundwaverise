@@ -185,18 +185,25 @@
         cursor: pointer;
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
-
 .login-button:hover {
-        background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .register-button:hover {
-        background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .profile-button:hover {
-        background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .signout-button:hover {
-        background-color: #681c1c;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #681c1c;
 }
 
 

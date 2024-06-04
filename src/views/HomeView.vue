@@ -32,6 +32,7 @@ import { useAuthStore } from "../store/authStore";
 import RecentTracksList from "../components/RecentTracksList.vue";
 const router = useRouter();
 const authStore = useAuthStore();
+const errorMessage = ref('');
 
 // Computed para verificar si el usuario está logueado
 const isUserLoggedIn = computed(() => !!authStore.currentUser);
