@@ -179,16 +179,11 @@ const handleDownloadBtn = () => {
     downloadTrack(props.track.audio_url, props.track.title);
 }
 
-const downloadFileName = computed(() => {
-    if (!props.track.title) return '';
-    return `${props.track.title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`;
-});
-
-const downloadTrack = () => {
-    const link = document.createElement('a');
-    link.href = props.track.audio_url;
-    downloadLink.download = `${title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`;
-    document.body.appendChild(downloadLink); 
+const downloadTrack = (audioUrl, title) => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = audioUrl;
+    downloadLink.download = `${title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`; // Sanitize title to use as filename
+    document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
 };
