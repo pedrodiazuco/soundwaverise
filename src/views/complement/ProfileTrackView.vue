@@ -169,7 +169,7 @@ const goToSignUp = () => {
 };
 
 const goToProfile = () => {
-    router.push(`/${currentUser.value.nickanme}`);
+    router.push(`/${authStore.currentUser.nickname}`);
 };
 
 const signOut = () => {

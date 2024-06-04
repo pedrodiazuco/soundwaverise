@@ -56,7 +56,7 @@ const goToSignUp = () => {
 };
 
 const goToProfile = () => {
-  router.push(`/${authStore.currentUser.id}`);
+  router.push(`/${authStore.currentUser.nickname}`);
 };
 
 const signOut = () => {

@@ -65,7 +65,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 // Computed para verificar si el usuario está logueado
-const isUserLoggedIn = computed(() => !!authStore.user);
+const isUserLoggedIn = computed(() => !!authStore.currentUser);
 
 const goToSignIn = () => {
     router.push("/signIn");
@@ -76,7 +76,7 @@ const goToSignUp = () => {
 };
 
 const goToProfile = () => {
-    router.push(`/${authStore.user.nickname}`);
+    router.push(`/${authStore.currentUser.nickname}`);
 };
 
 const signOut = () => {

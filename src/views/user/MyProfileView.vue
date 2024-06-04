@@ -205,7 +205,7 @@
 .upload-track-button:hover {
     transition: all .5s;
     transform: scale(1.05);
-    background-color: #216723;
+    background-color: #548c32;
 }
 .signout-button:hover {
     transition: all .5s;
@@ -345,6 +345,8 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 .edit-bio-btn:hover {
+  transition: all .5s;
+  transform: scale(1.05);
   background-color: #548c32;
 }
 
