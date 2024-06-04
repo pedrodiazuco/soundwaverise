@@ -18,7 +18,7 @@
           <!-- Caja para la imagen sin recortar -->
           <div v-if="!croppedImage" class="cropped-track-image">
             <div class="file-upload">
-              <input type="file" id="file" @change="onSelectImgFile" accept="image/*" :disabled="!trackTitle" hidden>
+              <input type="file" id="file" @change="onSelectImgFile" accept="image/*" hidden>
               <label for="file" class="upload-btn">Subir imagen del track</label>
             </div>
             <div v-if="imageSrc">
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <div class="track-title" for="trackTitle">Añade un archivo de audio:</div>
-              <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*" :disabled="!trackTitle">
+              <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*">
             </div>
             <div class="form-group">
               <select id="trackGenre" v-model="selectedGenre" class="select-genre">
@@ -619,11 +619,6 @@ const uploadTrackSubmit = async () => {
 }
 .upload-track-btn:disabled {
   background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.disabled-btn {
-  opacity: 0.5;
   cursor: not-allowed;
 }
 
