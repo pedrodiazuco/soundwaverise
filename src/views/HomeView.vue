@@ -173,7 +173,12 @@ const signOut = () => {
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
-    margin-top: 10px;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 </style>
