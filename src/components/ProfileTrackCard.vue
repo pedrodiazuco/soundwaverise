@@ -186,12 +186,11 @@ const downloadFileName = computed(() => {
 
 const downloadTrack = () => {
     const link = document.createElement('a');
-    link.href = props.track.audio_url; // Asegúrate de que la URL está correctamente especificada
-    link.download = downloadFileName.value || 'download'; // Utiliza un nombre de archivo seguro
-    link.target = '_blank'; // Esto abrirá la descarga en una nueva pestaña
+    link.href = props.track.audio_url; // URL del archivo de audio
+    link.download = downloadFileName.value || 'download'; // Nombre del archivo para guardar
     document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    link.click(); // Simula un clic para descargar el archivo
+    document.body.removeChild(link); // Limpia agregando y removiendo el elemento
 };
 
 const formatTime = time => {
