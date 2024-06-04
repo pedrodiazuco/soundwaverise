@@ -336,6 +336,7 @@
 .edit-bio-btn {
   background-color: black;
   font-size: 17px;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding: 10px 40px;
   margin-bottom: 20px;
