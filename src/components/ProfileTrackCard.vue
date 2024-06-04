@@ -176,7 +176,7 @@ const handleDownloadBtn = () => {
         errorMessage.value = 'Debes dar me gusta y comentar para descargar el track.';
         return;
     }
-    downloadTrack();
+    downloadTrack(props.track.audio_url, props.track.title);
 }
 
 const downloadFileName = computed(() => {
@@ -187,10 +187,10 @@ const downloadFileName = computed(() => {
 const downloadTrack = () => {
     const link = document.createElement('a');
     link.href = props.track.audio_url;
-    link.download = downloadFileName.value || 'download';  // Asegúrate de que downloadFileName sea una ref o reactive para que sea reactivo
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    downloadLink.download = `${title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`;
+    document.body.appendChild(downloadLink); 
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 };
 
 const formatTime = time => {
