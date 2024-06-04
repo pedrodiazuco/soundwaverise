@@ -19,6 +19,11 @@
       </div>
       <RankingTrackList></RankingTrackList>
     </div>
+    <transition name="fade">
+        <div v-if="errorMessage" class="error-popup">
+            <div class="error-message">{{ errorMessage }}</div>
+        </div>
+    </transition>
 </template>
     
 <script setup>
@@ -77,6 +82,7 @@ const signOut = () => {
   margin-bottom: 25px;
   background-color: black;
   font-size: 17px;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding: 10px 30px;
   border: none;
@@ -90,6 +96,7 @@ const signOut = () => {
   margin-bottom: 25px;
   background-color: black;
   font-size: 17px;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding: 10px 30px;
   border: none;
@@ -103,6 +110,7 @@ const signOut = () => {
   margin-bottom: 25px;
   background-color: black;
   font-size: 17px;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding: 10px 60px;
   border: none;
@@ -116,6 +124,7 @@ const signOut = () => {
   margin-bottom: 25px;
   background-color: black;
   font-size: 17px;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -123,18 +132,47 @@ const signOut = () => {
   cursor: pointer;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
-
 .login-button:hover {
-  background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .register-button:hover {
-  background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .profile-button:hover {
-  background-color: #333;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #333;
 }
 .signout-button:hover {
-  background-color: #681c1c;
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: #681c1c;
+}
+
+.error-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.error-message {
+    font-family: 'Poppins-SemiBold', sans-serif;
+    color: red;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 </style>

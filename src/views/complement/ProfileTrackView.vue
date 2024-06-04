@@ -54,9 +54,11 @@
     <div v-else>
         Track No Encontrado
     </div>
-    <div v-if="errorMessage" class="error-popup">
-        <div class="error-message">{{ errorMessage }}</div>
-    </div>
+    <transition name="fade">
+        <div v-if="errorMessage" class="error-popup">
+            <div class="error-message">{{ errorMessage }}</div>
+        </div>
+    </transition>
 </template>
 
 <script setup>
@@ -436,7 +438,7 @@ const signOut = () => {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
+    padding: 20px 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
@@ -444,7 +446,12 @@ const signOut = () => {
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
-    margin-top: 10px;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 </style>
