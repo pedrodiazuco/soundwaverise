@@ -171,7 +171,7 @@ const handleDownloadBtn = () => {
     if (!isUserLoggedIn.value) {
         errorMessage.value = 'Debes iniciar sesión para descargar el track.';
         return;
-    } 
+    }
     else if (!userHasLiked.value || !userHasCommented.value) {
         errorMessage.value = 'Debes dar me gusta y comentar para descargar el track.';
         return;

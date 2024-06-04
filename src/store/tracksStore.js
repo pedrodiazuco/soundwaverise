@@ -139,23 +139,6 @@ export const useTracksStore = defineStore({
       }
     },
 
-    /*------ ACTUALIZA UN TRACK ------*/
-    async updateTrack(id, trackData) {
-      try {
-        await apiClient.post(`/updateTrack/${id}`, trackData);
-        this.errorMessage = '';
-      } 
-      catch (error) {
-        console.error(`Error al actualizar un track con id ${id}:`, error);
-        if (error?.response) {
-          this.errorMessage = error.response.data.message;
-        }
-        else {
-          this.errorMessage = 'Error al actualizar un track. Inténtelo de nuevo más tarde.';
-        }
-      }
-    },
-
     /*------ INCREMENTA EL LIKE DE LOS COMENTARIOS ------*/
     async incrementPlayCount(id) {
       try {
