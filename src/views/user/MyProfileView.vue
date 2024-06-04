@@ -208,8 +208,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: auto; /* Ajusta el ancho según el contenido */
-  min-width: 40%; /* Establece un mínimo, ajustable según necesidades */
+  width: auto;
+  min-width: 40%;
   max-width: 75%;
   margin: auto;
   background-size: cover;
@@ -245,7 +245,7 @@
   width: 150px;
   height: 150px;
   border-radius: 3%;
-  border: 3px solid #ffffff; /* Borde negro sólido */
+  border: 3px solid #ffffff;
   margin-right: 20px;
   margin-left: 0px;
   flex-shrink: 0;
@@ -290,8 +290,8 @@
   width: 3px;
   background-color: #ffffff;
   border-radius: 10px;
-  margin: 0 60px; /* Margen a los lados del divisor */
-  height: auto; /* Ajusta la altura automáticamente al contenido */
+  margin: 0 60px;
+  height: auto;
 }
 
 .biography {

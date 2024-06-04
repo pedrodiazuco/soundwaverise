@@ -171,13 +171,27 @@ const handleDownloadBtn = () => {
     if (!isUserLoggedIn.value) {
         errorMessage.value = 'Debes iniciar sesión para descargar el track.';
         return;
-    }
+    } 
     else if (!userHasLiked.value || !userHasCommented.value) {
         errorMessage.value = 'Debes dar me gusta y comentar para descargar el track.';
         return;
     }
-    tracksStore.downloadTrack(props.track.id);
+    downloadTrack();
 }
+
+const downloadFileName = computed(() => {
+    if (!props.track.title) return '';
+    return `${props.track.title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`;
+});
+
+const downloadTrack = () => {
+    const link = document.createElement('a');
+    link.href = props.track.audio_url;
+    link.download = downloadFileName.value || 'download';  // Asegúrate de que downloadFileName sea una ref o reactive para que sea reactivo
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
 
 const formatTime = time => {
     const minutes = Math.floor(time / 60);
