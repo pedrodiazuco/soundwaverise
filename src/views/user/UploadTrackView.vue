@@ -16,7 +16,7 @@
             <<button @click="changeImage" class="change-image-btn">Cambiar Imagen</button>
           </div>
           <!-- Caja para la imagen sin recortar -->
-          <div v-if="!croppedImage" class="cropped-track-image">
+          <div v-if="!croppedImage & !trackTitle" class="cropped-track-image">
             <div class="file-upload">
               <input type="file" id="file" @change="onSelectImgFile" accept="image/*" :disabled="!trackTitle" hidden>
               <label for="file" class="upload-btn">Subir imagen del track</label>
@@ -48,7 +48,7 @@
                   placeholder= "Introduce una descripción">
                 </textarea>
             </div>
-            <div class="form-group">
+            <div v-if="!trackTitle" class="form-group">
               <div class="track-title" for="trackTitle">Añade un archivo de audio:</div>
               <input type="file" class="upload-audio-btn" @change="setAudioFile" accept="audio/*" :disabled="!trackTitle">
             </div>
