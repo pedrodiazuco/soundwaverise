@@ -1,43 +1,37 @@
-
 <template>
-  <!--Importamos las fuentes-->
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUND WAVE RISE</title>
-    <link rel="icon" href="/soundwaverise/src/assets/swr-icon.png" type="image/png">
-  </head>
+  <!-- Contenido del cuerpo de la aplicación-->
   <body>
     <div id="app" class="body">
-    <transition name="fade" appear>
-      <div>
-        <div class="header-container">
-          <router-link class="main-logo" to="/">| SOUND WAVE RISE |</router-link>
-        </div>
-
-        <div class="component-container">
-        <Navbar />
-        <RouterView />
-        </div>
-        
-        <div class="footer-container">
-          <div class="social-media">
-            <div class="facebook-section">
-              <div class="footer-text">SOUNDWAVERISE_OFFICIAL</div>
-              <img class="facebook-icon" src='./assets/facebook-icon.png'></img>
-            </div>
-            <div class="logo-section">
-              <img class="logo-icon" src='./assets/swr-icon.png'></img>
-            </div>
-            <div class="instagram-section">
-              <img class="instagram-icon" src='./assets/instagram-icon.png'></img>
-              <div class="footer-text">SOUNDWAVERISE_OFFICIAL</div>
+      <transition name="fade" appear>
+        <div>
+          <!-- Contenido de la cabecera principal de la aplicación-->
+          <div class="header-container">
+            <router-link class="main-logo" to="/">| SOUND WAVE RISE |</router-link>
+          </div>
+          <!-- Contenido del contenedor de componentes de la aplicación-->
+          <div class="component-container">
+            <Navbar />
+            <RouterView />
+          </div>
+          <!-- Contenido del footer principal de la aplicación-->
+          <div class="footer-container">
+            <div class="social-media">
+              <div class="facebook-section">
+                <div class="footer-text">SOUNDWAVERISE_OFFICIAL</div>
+                <img class="facebook-icon" src='./assets/icons/facebook-icon.png'></img>
+              </div>
+              <div class="logo-section">
+                <img class="logo-icon" src='./assets/icons/swr-icon.png'></img>
+              </div>
+              <div class="instagram-section">
+                <img class="instagram-icon" src='./assets/icons/instagram-icon.png'></img>
+                <div class="footer-text">SOUNDWAVERISE_OFFICIAL</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </transition>
-  </div>
+      </transition>
+    </div>
   </body>
 </template>
 
@@ -46,46 +40,51 @@
 import Navbar from './components/Navbar.vue'
 
 export default {
-    components: {
-        Navbar
-    },
+  components: {
+    Navbar
+  },
 };
 </script>
 
+
 <style>
-html, body {
+html,
+body {
   height: 100%;
   min-height: 100vh;
   margin: 0px;
   padding: 0%;
   width: 100%;
-  background-image: url('./assets/web-background.png');
+  background-image: url('./assets/icons/web-background.png');
   background-size: cover;
   background-position: center;
 }
+
 body::-webkit-scrollbar {
-  background-image: url('./assets/web-background.png');
+  background-image: url('./assets/icons/web-background.png');
   width: 18px;
-  border: 3px solid black ;
+  border: 3px solid black;
 }
+
 body::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background: black;
 }
 
 #app {
-  min-height: 100vh; /* Asegúrate de que el app también tenga al menos la altura de la ventana gráfica */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ajusta los elementos internos para cubrir verticalmente todo el espacio */
+  justify-content: space-between;
 }
 
 .header-container {
   width: 100%;
-  height: auto; /* Ajusta la altura según tus necesidades */
+  height: auto;
   display: flex;
   justify-content: center;
 }
+
 .main-logo {
   margin: 10px;
   color: black;
@@ -93,49 +92,58 @@ body::-webkit-scrollbar-thumb {
   letter-spacing: 0.05em;
   font-size: 25px;
   text-decoration: none;
-  /* Agrega otros estilos de texto según tus preferencias */
 }
-/* Cambiar color al pasar el mouse */
+
 .main-logo:hover {
-    color: rgb(10, 40, 65);
+  color: rgb(10, 40, 65);
 }
 
 
 
 .footer-container {
-  height: auto; /* Ajusta la altura según tus necesidades */
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .social-media {
   display: flex;
   justify-content: space-between;
   width: 80%;
 }
-.facebook-section, .instagram-section, .logo-section {
+
+.facebook-section,
+.instagram-section,
+.logo-section {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .facebook-icon {
-  margin-left: 10px; /* Espacio entre el icono y el texto */
+  margin-left: 10px;
 }
+
 img.facebook-icon {
   height: 30px;
   width: 30px;
 }
+
 .logo-icon {
-  margin: 10px 0; /* Espacio entre el icono y el texto */
+  margin: 10px 0;
 }
+
 img.logo-icon {
   height: 40px;
   width: 40px;
   filter: brightness(0) saturate(100%);
 }
+
 .instagram-icon {
-  margin-right: 10px; /* Espacio entre el icono y el texto */
+  margin-right: 10px;
 }
+
 img.instagram-icon {
   height: 30px;
   width: 30px;
@@ -151,24 +159,24 @@ img.instagram-icon {
   font-weight: bolder;
 }
 
-.header-container, .footer-container {
-  flex-shrink: 0; /* Previene que estos contenedores cambien su tamaño */
+.header-container,
+.footer-container {
+  flex-shrink: 0;
 }
 
 .component-container {
-  background-image: url('./assets/web-container-background.png');
+  background-image: url('./assets/icons/web-container-background.png');
   background-size: cover;
   background-position: center;
-  flex-grow: 1; /* Permite que este contenedor crezca y llene el espacio disponible */
-  padding-bottom: 80px; /* Padding para dar espacio al final del contenedor */
+  flex-grow: 1;
+  padding-bottom: 80px;
   height: 100%;
   min-height: 75vh;
   margin: 0px;
   width: 100%;
 }
 
-
-/* importaciones tipografías */
+/* Importaciones de tipografías */
 @font-face {
   font-family: 'Raleway';
   src: url('./assets/fonts/Raleway-Medium.ttf') format('truetype');
@@ -196,17 +204,4 @@ img.instagram-icon {
   font-weight: normal;
   font-style: normal;
 }
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.65s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to, .fade-leave {
-  opacity: 1;
-}
-
 </style>

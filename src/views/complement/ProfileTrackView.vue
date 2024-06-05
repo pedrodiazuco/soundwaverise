@@ -1,9 +1,10 @@
 <template>
+    <!-- Sección actual -->
     <div class="section">
         <div class="account" v-if="!isUserLoggedIn">
             <button class="login-button" @click="goToSignIn">ACCEDE A TU CUENTA</button>
         </div>
-        <div class="account" v-else > 
+        <div class="account" v-else>
             <button class="profile-button" title="Ir a mi perfil" @click="goToProfile">IR A MI PERFIL</button>
         </div>
         <div class="section-title">
@@ -12,26 +13,26 @@
         <div class="account" v-if="!isUserLoggedIn">
             <button class="register-button" title="Ir al registro" @click="goToSignUp">REGISTRARME</button>
         </div>
-        <div class="account" v-else >
+        <div class="account" v-else>
             <button class="signout-button" title="Cerrar sesión" @click="signOut">CERRAR SESIÓN</button>
         </div>
     </div>
+    <!-- Si el usuario es el propietario del track o el usuario administrador, puede borrarlo -->
     <div class="track-section" v-if="track">
         <div v-if="authStore.currentUser">
-            <div v-if="authStore.currentUser.role === 'superAdmin' || track.nickname === authStore.currentUser.nickname" class="edit-bio-container">
+            <div v-if="authStore.currentUser.role === 'superAdmin' || track.nickname === authStore.currentUser.nickname"
+                class="edit-bio-container">
                 <button class="delete-track-btn" @click="submitDeleteTrack">ELIMINAR TRACK</button>
             </div>
         </div>
+        <!-- Sección que muestra el track -->
         <div class="track-container">
-            <ProfileTrackCard 
-                :track="track"
-                :comment_count="comments.length"
-                @commentClicked="focusCommentInput"
-            ></ProfileTrackCard>
+            <ProfileTrackCard :track="track" :comment_count="comments.length" @commentClicked="focusCommentInput">
+            </ProfileTrackCard>
         </div>
         <!-- Sección para enviar comentarios -->
         <div v-if="isUserLoggedIn" class="comment-input-container">
-            <img :src="authStore.currentUser.photo_url" class="user-image" alt="User Image"/>
+            <img :src="authStore.currentUser.photo_url" class="user-image" alt="User Image" />
             <input type="text" ref="commentInput" v-model="newComment" placeholder="Escribe un comentario" />
             <button @click="submitComment">Enviar</button>
         </div>
@@ -43,10 +44,9 @@
         <!-- Sección de comentarios existentes -->
         <div class="comment-title">COMENTARIOS</div>
         <div class="comments-section">
-            <div class="comment" 
-                v-for="comment in comments" 
-                :key="comment.id">
-                <router-link class="comment-user" :to="`/profile/${comment.nickname}`">{{ comment.nickname }}</router-link>
+            <div class="comment" v-for="comment in comments" :key="comment.id">
+                <router-link class="comment-user" :to="`/profile/${comment.nickname}`">{{ comment.nickname
+                    }}</router-link>
                 <span class="comment-description">{{ comment.comment }}</span>
             </div>
         </div>
@@ -54,6 +54,7 @@
     <div v-else>
         Track No Encontrado
     </div>
+    <!-- Mostrar el error si ocurre -->
     <transition name="fade">
         <div v-if="errorMessage" class="error-popup">
             <div class="error-message">{{ errorMessage }}</div>
@@ -80,7 +81,6 @@ const newComment = ref('');
 const commentInput = ref(null);
 const errorMessage = ref('');
 
-// Computed para verificar si el usuario está logueado
 const isUserLoggedIn = computed(() => !!authStore.currentUser);
 
 onMounted(async () => {
@@ -103,14 +103,16 @@ onMounted(async () => {
     }
 });
 
+//OBSERVADOR PARA ESTABLECER EL TIEMPO DEL MENSAJE DE ERROR
 watch(errorMessage, (newValue) => {
     if (newValue) {
-            setTimeout(() => {
+        setTimeout(() => {
             errorMessage.value = '';
         }, 1500);
     }
 });
 
+//AL PULSAR EN EL BOTÓN DE ELIMINAR UN TRACK
 const submitDeleteTrack = async () => {
     try {
         const confirmDelete = confirm(`¿Realmente quieres eliminar el track llamado: ${track.value.title}?`);
@@ -138,6 +140,7 @@ const focusCommentInput = () => {
     }
 };
 
+//AL PULSAR EN EL BOTÓN ENVIAR COMENTARIO
 const submitComment = async () => {
     if (!newComment.value.trim()) {
         alert('El comentario no puede estar vacío.');
@@ -151,7 +154,7 @@ const submitComment = async () => {
         const commentData = { user_id: currentUser.value.id, comment: newComment.value };
         await tracksStore.addComment(track.value.id, commentData);
         if (tracksStore.comments) {
-            comments.value.push({nickname: currentUser.value.nickname, comment: newComment.value});
+            comments.value.push({ nickname: currentUser.value.nickname, comment: newComment.value });
             newComment.value = '';
             emit('commentAdded');
         }
@@ -177,18 +180,18 @@ const signOut = () => {
         router.push("/");
     });
 };
-
 </script>
 
-<style scoped>
 
-.section{
+<style scoped>
+.section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 40px;
     margin-bottom: 10px;
 }
+
 .section-title {
     justify-content: center;
     font-family: 'Anton', sans-serif;
@@ -197,6 +200,7 @@ const signOut = () => {
     margin-top: -30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .login-button {
     margin-right: 10px;
     margin-left: 50px;
@@ -211,6 +215,7 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .profile-button {
     margin-right: 10px;
     margin-left: 50px;
@@ -225,6 +230,7 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .register-button {
     margin-right: 50px;
     margin-left: 10px;
@@ -239,6 +245,7 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .signout-button {
     margin-right: 50px;
     margin-left: 10px;
@@ -253,21 +260,25 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .login-button:hover {
     transition: all .5s;
     transform: scale(1.05);
     background-color: #333;
 }
+
 .register-button:hover {
     transition: all .5s;
     transform: scale(1.05);
     background-color: #333;
 }
+
 .profile-button:hover {
     transition: all .5s;
     transform: scale(1.05);
     background-color: #333;
 }
+
 .signout-button:hover {
     transition: all .5s;
     transform: scale(1.05);
@@ -288,6 +299,7 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .delete-track-btn:hover {
     transition: all .5s;
     transform: scale(1.05);
@@ -299,6 +311,7 @@ const signOut = () => {
     align-items: center;
     width: 100%;
 }
+
 .track-container {
     display: flex;
     flex-direction: column;
@@ -315,22 +328,24 @@ const signOut = () => {
     margin-top: 20px;
     margin-bottom: 2px;
 }
+
 .description-section {
     width: 100%;
-    width: calc(63% - 8vh); /* Ajusta esto según necesites */
+    width: calc(63% - 8vh);
     padding: 10px 20px 20px 20px;
     border: 1px solid #ccc;
     background-color: rgb(0, 0, 0);
     border-radius: 20px;
     margin-bottom: 10px;
 }
+
 .description {
     white-space: pre-wrap;
     padding: 10px 10px 0px 10px;
     display: flex;
     flex-direction: column;
     font-family: 'Poppins-SemiBold';
-    font-weight: bold; /* Hace el nombre del usuario más notorio */
+    font-weight: bold;
     font-size: 14px;
     color: #ffffff;
     margin-bottom: 2px;
@@ -339,24 +354,26 @@ const signOut = () => {
 
 .comment-input-container {
     width: 100%;
-    width: calc(65% - 8vh); /* Ajusta esto según necesites */
+    width: calc(65% - 8vh);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     padding: 10px 0 10px 0;
     flex-direction: row;
-    box-sizing: border-box;  /* Asegura que el padding no afecte la anchura */
+    box-sizing: border-box;
 }
+
 .user-image {
-    width: 40px; /* Tamaño de la imagen del usuario */
-    height: 40px; /* Asegúrate de que la imagen sea circular, si lo deseas */
-    border-radius: 50%; /* Hace la imagen circular */
-    object-fit: cover; /* Asegura que la imagen se cubra correctamente */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
     border: 3px solid #ccc;
     border-radius: 20px;
     filter: drop-shadow(1px 1px 2px rgb(67, 67, 67))
 }
+
 .comment-input-container input {
     flex-grow: 1;
     font-size: 13px;
@@ -367,10 +384,12 @@ const signOut = () => {
     border-radius: 20px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .comment-input-container input:hover {
-    transition: all .2s ;
+    transition: all .2s;
     transform: scale(1.01);
 }
+
 .comment-input-container button {
     background-color: black;
     font-size: 14px;
@@ -382,8 +401,9 @@ const signOut = () => {
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .comment-input-container button:hover {
-    transition: all .2s ;
+    transition: all .2s;
     transform: scale(1.02);
 }
 
@@ -395,40 +415,44 @@ const signOut = () => {
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
 .comments-section {
     width: 100%;
-    width: calc(63% - 8vh); /* Ajusta esto según necesites */
+    width: calc(63% - 8vh);
     padding: 10px 20px 20px 20px;
     border: 1px solid #ccc;
     background-color: rgb(0, 0, 0);
     border-radius: 20px;
     margin-bottom: 10px;
 }
+
 .comment {
     border-bottom: 2px solid #eee;
     padding: 10px 0px 15px 10px;
     display: flex;
     flex-direction: column;
     font-family: 'Poppins-SemiBold';
-    font-weight: bold; /* Hace el nombre del usuario más notorio */
+    font-weight: bold;
     font-size: 14px;
     color: #ffffff;
     margin-bottom: 2px;
 }
+
 .comment-user {
     text-decoration: none;
     color: #ffffff;
     font-family: 'Poppins-SemiBold';
-    font-weight: bold; /* Hace el nombre del usuario más notorio */
+    font-weight: bold;
     font-size: 14px;
-    margin-bottom: 2px; /* Espacio entre el nombre del usuario y el comentario */
+    margin-bottom: 2px;
 }
+
 .comment-description {
     white-space: pre-wrap;
     font-family: 'Poppins';
     font-size: 15px;
     padding-left: 15px;
-    color: #a8a8a8; 
+    color: #a8a8a8;
 }
 
 .error-popup {
@@ -442,15 +466,19 @@ const signOut = () => {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
 }
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
     opacity: 0;
 }
-
 </style>

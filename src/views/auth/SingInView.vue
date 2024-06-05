@@ -1,39 +1,41 @@
 <template>
+    <!-- Sección actual -->
     <div class="signIn-section">
         <div class="signIn-section-title">
             ELEVA TU SONIDO
         </div>
     </div>
     <div class="signIn-section-subtitle">
-            Descubre y comparte música con el mundo.
+        Descubre y comparte música con el mundo.
     </div>
+    <!-- Contenedor de signIn -->
     <div class="signIn-container">
         <div class="signIn-box">
-        <div class="signIn-title">
-            ----- INICIO DE USUARIO -----
-        </div>
-        <form @submit.prevent="signInSubmit">
-            <div class="input-title-info">Nombre de Artista</div>
-            <div class="form-group">
-                <input type="email" id="email" v-model.trim="email" @blur="validateEmail" :class="{'valid-input': emailValid}" placeholder="Introduzca su email">
+            <div class="signIn-title">
+                ----- INICIO DE USUARIO -----
             </div>
-            <div class="input-title-info">Contraseña</div>
-            <div class="form-group">
-                <input type="password" id="password" v-model="password" @blur="validatePassword" :class="{'valid-input': passwordValid}" placeholder="Introduce su contraseña">
-            </div>
-            <button 
-                class="button-signIn"
-                :class="{ 'btn-disabled': !isFormValid }" 
-                type="submit" 
-            >
+            <form @submit.prevent="signInSubmit">
+                <div class="input-title-info">Nombre de Artista</div>
+                <div class="form-group">
+                    <input type="email" id="email" v-model.trim="email" @blur="validateEmail"
+                        :class="{ 'valid-input': emailValid }" placeholder="Introduzca su email">
+                </div>
+                <div class="input-title-info">Contraseña</div>
+                <div class="form-group">
+                    <input type="password" id="password" v-model="password" @blur="validatePassword"
+                        :class="{ 'valid-input': passwordValid }" placeholder="Introduce su contraseña">
+                </div>
+                <!-- Botón de submit -->
+                <button class="button-signIn" :class="{ 'btn-disabled': !isFormValid }" type="submit">
                     Acceder
-            </button>
-            <div class="extra-info">
-                ¿No tienes cuenta? <router-link to="/signUp" class="link">Regístrate</router-link>
-            </div>
-        </form>
+                </button>
+                <div class="extra-info">
+                    ¿No tienes cuenta? <router-link to="/signUp" class="link">Regístrate</router-link>
+                </div>
+            </form>
         </div>
     </div>
+    <!-- Mostrar el error si ocurre -->
     <transition name="fade">
         <div v-if="errorMessage" class="error-popup">
             <div class="error-message">{{ errorMessage }}</div>
@@ -63,7 +65,7 @@ const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$.,!%*#?&])[A-Za-z\d@$.,!
 
 watch(errorMessage, (newValue) => {
     if (newValue) {
-            setTimeout(() => {
+        setTimeout(() => {
             errorMessage.value = '';
         }, 1500);
     }
@@ -108,21 +110,22 @@ const signInSubmit = async () => {
 
 
 <style scoped>
-
-.signIn-section{
+.signIn-section {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 40px;
     margin-bottom: 20px;
 }
+
 .signIn-section-title {
     font-family: 'Anton', sans-serif;
     font-size: 60px;
     text-decoration: none;
     margin-top: -30px;
 }
-.signIn-section-subtitle{
+
+.signIn-section-subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,23 +137,25 @@ const signInSubmit = async () => {
 }
 
 .signIn-container {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 30px;
 }
+
 .signIn-box {
-    background-image: url('../../assets/box-background.png');
-    background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-image: url('../../assets/icons/box-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 20px;
     border-radius: 10px;
     max-width: 45%;
     width: 100%;
     box-shadow: 0 0 3px rgb(78, 78, 78);
 }
+
 .signIn-title {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -160,6 +165,7 @@ const signInSubmit = async () => {
     color: white;
     text-align: center;
 }
+
 .input-title-info {
     text-align: center;
     font-size: 15px;
@@ -167,17 +173,20 @@ const signInSubmit = async () => {
     color: white;
     margin: 5px 0 5px 0;
 }
+
 .form-group {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
     font-size: 20px;
 }
-.form-group:hover{
+
+.form-group:hover {
     transition: all .2s;
     transform: scale(1.009);
     filter: drop-shadow(0 0 7px black);
 }
+
 input {
     display: flex;
     text-align: center;
@@ -187,6 +196,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 10px;
 }
+
 .valid-input {
     border: 4px solid rgb(113, 195, 113);
 }
@@ -203,6 +213,7 @@ input {
     margin-top: 30px;
     cursor: pointer;
 }
+
 .button-signIn:hover {
     text-decoration: none;
     transition: all .2s;
@@ -210,6 +221,7 @@ input {
     filter: drop-shadow(0 0 7px black);
     background-color: rgb(87, 196, 255);
 }
+
 .btn-disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -238,14 +250,19 @@ input {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
 }
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
     opacity: 0;
 }
 

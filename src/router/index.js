@@ -1,6 +1,8 @@
+//IMPORTACIONES GENERALES
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '../store/authStore';
 
+//IMPORTACIONES DE VISTAS
 import HomeView from '../views/HomeView.vue';
 import ArtistsView from '../views/nav/ArtistsView.vue';
 import AboutView from '../views/nav/AboutView.vue';
@@ -14,6 +16,7 @@ import ProfileArtistView from '../views/complement/ProfileArtistView.vue';
 import ProfileTrackView from '../views/complement/ProfileTrackView.vue';
 import UploadTrackView from '../views/user/UploadTrackView.vue'
 
+//CONFIGURACIÓN DE RUTAS
 const routes = [
   {path: '/', name: 'Home', component: HomeView},
   {path: '/artists', name: 'Artists', component: ArtistsView},
@@ -29,11 +32,13 @@ const routes = [
   {path: '/uploadTrack', name: 'Upload Track', component: UploadTrackView, meta: { requiresAuth: true }},
 ];
 
+//CREACIÓN DE ENRUTADOR
 const router = createRouter({
   history: createWebHistory(),
   routes
 });
 
+//EN CASO DE QUE HAYA QUE REDIRIGIR EN RUTAS PROTEGIDAS
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   const isAuthenticated = !!authStore.currentUser;
@@ -51,4 +56,5 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+//ECPORTACIÓN DEL ENRUTADOR
 export default router;

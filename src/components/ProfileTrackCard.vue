@@ -16,12 +16,12 @@
                     >
                         <img v-if="userHasLiked" 
                             class="like-btn-image" 
-                            src="../assets/like-icon-red.png" 
+                            src="../assets/icons/like-icon-red.png" 
                             alt="Liked" 
                         />
                         <img v-else 
                             class="like-btn-image"
-                            src="../assets/like-icon.png"
+                            src="../assets/icons/like-icon.png"
                             alt="No Liked"
                         />
                         <span class="like-count">{{ like_count }}</span>
@@ -34,12 +34,12 @@
                     >
                         <img v-if="userHasCommented" 
                             class="comment-btn-image" 
-                            src="../assets/comment-icon-blue.png" 
+                            src="../assets/icons/comment-icon-blue.png" 
                             alt="Commented" 
                         />
                         <img v-else 
                             class="comment-btn-image" 
-                            src="../assets/comment-icon.png"
+                            src="../assets/icons/comment-icon.png"
                             alt="Not Commented" 
                         />
                         <span class="comment-count">{{ comment_count }}</span>
@@ -52,14 +52,14 @@
             <!-- Botones dinámicos de Play y Pause -->
             <div class="playback-controls">
                 <button v-if="!isPlaying" @click="togglePlayback" class="control-btn" :disabled="!isReady">
-                    <img src="../assets/play-button.png" alt="Play">
+                    <img src="../assets/icons/play-button.png" alt="Play">
                 </button>
                 <button v-else @click="togglePlayback" class="control-btn">
-                    <img src="../assets/pause-button.png" alt="Pause">
+                    <img src="../assets/icons/pause-button.png" alt="Pause">
                 </button>
                 <!-- Icono y número de reproducciones -->
                 <div class="play-count-container">
-                    <img src="../assets/plays-icon.png" alt="Plays Icon" class="plays-icon">
+                    <img src="../assets/icons/plays-icon.png" alt="Plays Icon" class="plays-icon">
                     <span class="plays-count">{{ playCount }}</span>
                 </div>
             </div>
@@ -74,10 +74,10 @@
             <button
                 class="download-btn"
                 :class="{ 'btn-disabled': !isUserLoggedIn || !userHasCommented || !userHasLiked }"
-                src="../assets/download-icon.png"
+                src="../assets/icons/download-icon.png"
                 @click="handleDownloadBtn"
             >
-                <img class="download-btn-image" src="../assets/download-icon.png" alt="Download" />
+                <img class="download-btn-image" src="../assets/icons/download-icon.png" alt="Download" />
             </button>
         </div>
     </div>
@@ -567,7 +567,6 @@ const goToArtistTrackProfile = () => {
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
-    margin-top: 10px;
 }
 .fade-enter-active, .fade-leave-active {
     transition: opacity 0.5s;
