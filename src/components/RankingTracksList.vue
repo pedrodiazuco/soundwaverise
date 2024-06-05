@@ -1,5 +1,5 @@
 <template>
-    <div class="music-section">
+  <div class="music-section">
     <div class="filter-container">
       <label for="genre-select" class="filter-label">FILTRAR POR GÉNERO:</label>
       <select v-model="selectedGenre" class="genre-select">
@@ -11,22 +11,17 @@
     </div>
     <div class="tracks-container">
       <transition-group name="fade" appear>
-        <TrackCard
-          v-for="track in sortedTracks"
-          :key="track.id"
-          :track="track"
-          :error-handler="errorHandler"
-        />
+        <TrackCard v-for="track in sortedTracks" :key="track.id" :track="track" :error-handler="errorHandler" />
       </transition-group>
     </div>
     <transition name="fade">
-    <div v-if="errorMessage" class="error-popup">
-            <div class="error-message">{{ errorMessage }}</div>
-    </div>
+      <div v-if="errorMessage" class="error-popup">
+        <div class="error-message">{{ errorMessage }}</div>
+      </div>
     </transition>
-    </div>
+  </div>
 </template>
-  
+
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useTracksStore } from '../store/tracksStore';
@@ -41,22 +36,22 @@ const genres = computed(() => {
   const allGenres = tracksStore.tracks.map(track => track.genre);
   return Array.from(new Set(allGenres));
 });
-  
+
 //PROPIEDAD COMPUTADA PARA OBTENER LOS TRACKS ORDENADOS
 const sortedTracks = computed(() => {
   let filteredTracks = tracks.value;
-    if (selectedGenre.value) {
-        filteredTracks = filteredTracks.filter(track => track.genre === selectedGenre.value);
-    }
-    return filteredTracks.sort((a, b) => {
+  if (selectedGenre.value) {
+    filteredTracks = filteredTracks.filter(track => track.genre === selectedGenre.value);
+  }
+  return filteredTracks.sort((a, b) => {
     // Calcular el ranking de cada track
     const rankA = a.plays + a.like_count * 5 + a.comment_count * 10;
     const rankB = b.plays + b.like_count * 5 + b.comment_count * 10;
     // Ordenar de mayor a menor ranking
     return rankB - rankA;
-    });
+  });
 });
-  
+
 //POR SI CAMBIA EL DOM DE LOS TRACKS, TENERLO ACTUALIZADO
 onMounted(async () => {
   await fetchTracks();
@@ -64,9 +59,9 @@ onMounted(async () => {
 
 watch(errorMessage, (newValue) => {
   if (newValue) {
-          setTimeout(() => {
-          errorMessage.value = '';
-      }, 1500);
+    setTimeout(() => {
+      errorMessage.value = '';
+    }, 1500);
   }
 });
 
@@ -85,81 +80,88 @@ const fetchTracks = async () => {
 };
 
 </script>
-  
-<style scoped>
-  .music-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .filter-container {
+<style scoped>
+.music-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-container {
   display: flex;
   flex-direction: inline;
-  align-items: center; /* Centra los elementos verticalmente */
+  align-items: center;
   background-color: black;
   padding: 4px 20px;
-  margin-bottom: 10px; /* Espacio después del filtro, antes de la lista de tracks */
-  border-radius: 5px; /* Bordes redondeados para el contenedor del filtro */
+  margin-bottom: 10px;
+  border-radius: 5px;
   width: auto;
 }
+
 .filter-label {
   color: white;
-  margin-bottom: 5px; /* Espacio entre la etiqueta y el selector */
-  font-size: 16px; /* Ajusta según el diseño */
+  margin-bottom: 5px;
+  font-size: 16px;
   padding: 5px 0px 0 0;
   font-family: 'Raleway-Medium', sans-serif;
   font-weight: 500;
 }
+
 .genre-select {
-  color: white; /* Texto blanco para el select */
-  background-color: black; /* Fondo negro para el select */
-  border: 1px solid rgb(0, 0, 0); /* Borde blanco para hacerlo visible en el fondo negro */
+  color: white;
+  background-color: black;
+  border: 1px solid rgb(0, 0, 0);
   outline: none;
   border-radius: 10px;
-  padding: 5px 0px; /* Padding para hacer más grande el área clickeable */
-  cursor: pointer; /* Cambia el cursor a una mano para indicar que es seleccionable */
+  padding: 5px 0px;
+  cursor: pointer;
   font-size: 16px;
   font-family: 'Raleway-Medium', sans-serif;
   text-transform: uppercase;
   width: auto;
 }
 
-  .tracks-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-  }
-  .fade-enter-active {
-    opacity: 0;
-  }
-  
-  .fade-enter-to {
-    opacity: 1;
-  }
+.tracks-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
 
-  .error-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+.fade-enter-active {
+  opacity: 0;
 }
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.error-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
 .error-message {
-    font-family: 'Poppins-SemiBold', sans-serif;
-    color: red;
+  font-family: 'Poppins-SemiBold', sans-serif;
+  color: red;
 }
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.5s;
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
-    opacity: 0;
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
-  </style>
-  
+</style>

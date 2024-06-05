@@ -13,7 +13,6 @@
 </script>
 
 <style>
-/* Estilo para la barra de navegación */
 .navbar {
     background-color: black;
     padding-top: 12px;
@@ -22,17 +21,15 @@
     text-align: center;
 }
 
-/* Estilo para los enlaces */
 .nav-link {
     color: white;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 0.15em;
     text-decoration: none;
-    margin-right: 40px; /* Espaciado horizontal entre enlaces */
+    margin-right: 40px;
     font-size: 18px;
 }
 
-/* Cambiar color al pasar el mouse */
 .nav-link:hover {
     transition: all .2s;
     transform: scale(1.1);

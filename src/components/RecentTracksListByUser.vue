@@ -44,17 +44,17 @@ margin-top: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .tracks-container {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 .fade-enter-active {
-opacity: 0;
+    opacity: 0;
 }
 
 .fade-enter-to {
-opacity: 1;
+    opacity: 1;
 }
 
 </style>

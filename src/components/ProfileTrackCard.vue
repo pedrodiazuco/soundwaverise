@@ -9,39 +9,18 @@
                 <div class="track-title">{{ track.title }}</div>
                 <div class="feed-icons">
                     <!-- Botón de like -->
-                    <button
-                        class="like-btn"
-                        :class="{ 'btn-disabled': !isUserLoggedIn }"
-                        @click="handleLikeBtn"
-                    >
-                        <img v-if="userHasLiked" 
-                            class="like-btn-image" 
-                            src="../assets/icons/like-icon-red.png" 
-                            alt="Liked" 
-                        />
-                        <img v-else 
-                            class="like-btn-image"
-                            src="../assets/icons/like-icon.png"
-                            alt="No Liked"
-                        />
+                    <button class="like-btn" :class="{ 'btn-disabled': !isUserLoggedIn }" @click="handleLikeBtn">
+                        <img v-if="userHasLiked" class="like-btn-image" src="../assets/icons/like-icon-red.png"
+                            alt="Liked" />
+                        <img v-else class="like-btn-image" src="../assets/icons/like-icon.png" alt="No Liked" />
                         <span class="like-count">{{ like_count }}</span>
                     </button>
                     <!-- Botón de comentarios -->
-                    <button
-                        class="comment-btn"
-                        :class="{ 'btn-disabled': !isUserLoggedIn }"
-                        @click="handleCommentBtn"
-                    >
-                        <img v-if="userHasCommented" 
-                            class="comment-btn-image" 
-                            src="../assets/icons/comment-icon-blue.png" 
-                            alt="Commented" 
-                        />
-                        <img v-else 
-                            class="comment-btn-image" 
-                            src="../assets/icons/comment-icon.png"
-                            alt="Not Commented" 
-                        />
+                    <button class="comment-btn" :class="{ 'btn-disabled': !isUserLoggedIn }" @click="handleCommentBtn">
+                        <img v-if="userHasCommented" class="comment-btn-image"
+                            src="../assets/icons/comment-icon-blue.png" alt="Commented" />
+                        <img v-else class="comment-btn-image" src="../assets/icons/comment-icon.png"
+                            alt="Not Commented" />
                         <span class="comment-count">{{ comment_count }}</span>
                     </button>
                 </div>
@@ -71,12 +50,9 @@
         </div>
         <div class="download-section">
             <!-- Botón de Descarga -->
-            <button
-                class="download-btn"
+            <button class="download-btn"
                 :class="{ 'btn-disabled': !isUserLoggedIn || !userHasCommented || !userHasLiked }"
-                src="../assets/icons/download-icon.png"
-                @click="handleDownloadBtn"
-            >
+                src="../assets/icons/download-icon.png" @click="handleDownloadBtn">
                 <img class="download-btn-image" src="../assets/icons/download-icon.png" alt="Download" />
             </button>
         </div>
@@ -171,7 +147,7 @@ const handleDownloadBtn = () => {
     if (!isUserLoggedIn.value) {
         errorMessage.value = 'Debes iniciar sesión para descargar el track.';
         return;
-    } 
+    }
     else if (!userHasLiked.value || !userHasCommented.value) {
         errorMessage.value = 'Debes dar me gusta y comentar para descargar el track.';
         return;
@@ -186,9 +162,9 @@ const downloadFileName = computed(() => {
 
 const downloadTrack = () => {
     const link = document.createElement('a');
-    link.href = props.track.audio_url; // Asegúrate de que la URL está correctamente especificada
-    link.download = downloadFileName.value || 'download'; // Utiliza un nombre de archivo seguro
-    link.target = '_blank'; // Esto abrirá la descarga en una nueva pestaña
+    link.href = props.track.audio_url;
+    link.download = downloadFileName.value || 'download';
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -200,13 +176,13 @@ const formatTime = time => {
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 };
 
-onMounted( async () => {
+onMounted(async () => {
     if (isUserLoggedIn.value && props.track && props.track.id) {
         await verifyUserHasLiked();
         console.log("User has liked:", userHasLiked.value);
         await verifyUserHasCommented();
         console.log("User has commented:", userHasCommented.value);
-        
+
     }
 
     wavesurfer = WaveSurfer.create({
@@ -220,7 +196,7 @@ onMounted( async () => {
         cursorColor: 'purple',
         cursorWidth: 4,
         height: 70,
-        barGap: 3 // the optional spacing between bars of the wave, if not provided will be calculated in legacy format
+        barGap: 3
     })
 
     wavesurfer.on('ready', () => {
@@ -266,7 +242,7 @@ onMounted( async () => {
 
 watch(() => props.track.audio_url, (newUrl) => {
     if (newUrl) {
-        isReady.value = false; // Resetear el estado de listo cuando cambia la URL
+        isReady.value = false;
         wavesurfer.load(newUrl);
     }
 });
@@ -280,7 +256,7 @@ watch(() => props.track.id, async (newId, oldId) => {
 
 watch(errorMessage, (newValue) => {
     if (newValue) {
-            setTimeout(() => {
+        setTimeout(() => {
             errorMessage.value = '';
         }, 1500);
     }
@@ -300,7 +276,7 @@ const togglePlayback = () => {
 const goToArtistTrackProfile = () => {
     console.log(props.track.nickname);
     if (isUserLoggedIn.value) {
-        if(props.track.nickname === authStore.currentUser.nickname) {
+        if (props.track.nickname === authStore.currentUser.nickname) {
             router.push(`/${authStore.currentUser.nickname}`);
         }
         else {
@@ -311,9 +287,6 @@ const goToArtistTrackProfile = () => {
         router.push(`/profile/${props.track.nickname}`)
     }
 };
-
-
-
 </script>
 
 <style scoped>
@@ -323,13 +296,14 @@ const goToArtistTrackProfile = () => {
     padding: 20px 40px 0px 40px;
     border-radius: 8px;
     width: 100%;
-    width: calc(60% - 8vh); /* Ajusta esto según necesites */
+    width: calc(60% - 8vh);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background-size: cover; /* Asegura que la imagen cubra toda el área disponible */
-    background-position: center; /* Centra la imagen en el contenedor */
+    background-size: cover;
+    background-position: center;
     overflow: hidden;
     z-index: 0;
 }
+
 .track-card::before {
     content: '';
     position: absolute;
@@ -337,18 +311,21 @@ const goToArtistTrackProfile = () => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(28, 28, 28, 0.4); /* Añade una capa oscura sobre la imagen para mejorar la legibilidad del texto */
+    background: rgba(28, 28, 28, 0.4);
     background: radial-gradient(transparent, black 98%);
     z-index: 1;
 }
 
-.artist-genre-section, .title-feed-section, .music-section {
+.artist-genre-section,
+.title-feed-section,
+.music-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
     text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
 }
+
 .track-artist {
     position: relative;
     color: white;
@@ -360,11 +337,13 @@ const goToArtistTrackProfile = () => {
     text-decoration: none;
     z-index: 2;
 }
-.track-artist:hover{
+
+.track-artist:hover {
     transition: all .2s;
     transform: scale(1.02);
     filter: drop-shadow(0 0 7px black);
 }
+
 .track-genre {
     position: relative;
     text-align: right;
@@ -376,6 +355,7 @@ const goToArtistTrackProfile = () => {
     text-decoration: none;
     z-index: 2;
 }
+
 .track-title {
     flex: 1;
     position: relative;
@@ -389,7 +369,8 @@ const goToArtistTrackProfile = () => {
     text-decoration: none;
     z-index: 2;
 }
-.track-title:hover{
+
+.track-title:hover {
     transition: all .2s;
     transform: scale(1.005);
     filter: drop-shadow(0 0 7px black);
@@ -400,44 +381,52 @@ const goToArtistTrackProfile = () => {
     display: flex;
     z-index: 2;
 }
+
 .like-btn {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0 5px 0 20px;
 }
+
 .like-btn-image {
     width: 30px;
     height: 30px;
     filter: drop-shadow(0 0 5px black);
 }
-.like-btn-image:hover{
+
+.like-btn-image:hover {
     transition: all .2s;
     transform: scale(1.04);
     filter: drop-shadow(0 0 7px black);
 }
+
 .like-count {
     color: white;
     font-size: 16px;
     font-family: 'Poppins-SemiBold', sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
+
 .comment-btn {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0 0;
 }
+
 .comment-btn-image {
     width: 28px;
     height: 28px;
     filter: drop-shadow(0 0 5px black)
 }
-.comment-btn-image:hover{
+
+.comment-btn-image:hover {
     transition: all .2s;
     transform: scale(1.04);
     filter: drop-shadow(0 0 7px black);
 }
+
 .comment-count {
     color: white;
     font-size: 16px;
@@ -445,6 +434,7 @@ const goToArtistTrackProfile = () => {
     padding-left: 4px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
+
 .btn-disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -454,13 +444,15 @@ const goToArtistTrackProfile = () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 0 0 0; /* Ajusta el padding para la sección de música */
+    padding: 0px 0 0 0;
 }
+
 .playback-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .control-btn {
     border: none;
     cursor: pointer;
@@ -469,27 +461,32 @@ const goToArtistTrackProfile = () => {
     padding: 10px 6px 0px 0px;
     z-index: 2;
 }
+
 .control-btn img {
     width: 70px;
     height: 70px;
     filter: drop-shadow(0 0 5px black)
 }
+
 .control-btn img:hover {
-    transition: all .1s ;
+    transition: all .1s;
     transform: scale(1.02);
     filter: drop-shadow(0 0 10px black)
 }
+
 .play-count-container {
     display: flex;
     align-items: center;
 }
+
 .plays-icon {
-    width: 12px; 
-    height: 12px; 
+    width: 12px;
+    height: 12px;
     margin-right: 3px;
     filter: drop-shadow(0 0 10px black);
     z-index: 2;
 }
+
 .plays-count {
     color: white;
     font-size: 13px;
@@ -502,26 +499,32 @@ const goToArtistTrackProfile = () => {
     flex-grow: 1;
     position: relative;
     width: 100%;
-    height: 50px; /* Adjust as per your waveform component */
+    height: 50px;
     padding: 0px 12px 25px 0;
     z-index: 2;
 }
+
 .waveform {
     filter: drop-shadow(0 0 5px black);
 }
+
 .waveform:hover {
     transform: scale(1.001);
 }
-.current-time, .total-time {
+
+.current-time,
+.total-time {
     position: absolute;
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
 }
+
 .current-time {
     left: 0;
     z-index: 3;
 }
+
 .total-time {
     right: 0;
     padding-right: 15px;
@@ -533,8 +536,9 @@ const goToArtistTrackProfile = () => {
     justify-content: center;
     width: 100%;
     align-items: center;
-    padding: 5px 0 0 0; /* Ajusta el padding para la sección de música */
+    padding: 5px 0 0 0;
 }
+
 .download-btn {
     background: none;
     border: none;
@@ -542,15 +546,17 @@ const goToArtistTrackProfile = () => {
     padding: 0px 0 0 0;
     z-index: 3;
 }
-.download-btn-image{
+
+.download-btn-image {
     width: 130px;
     height: 28px;
     filter: drop-shadow(0 0 10px black);
 }
+
 .download-btn-image:hover {
     transition: all .5s;
     transform: scale(1.05);
-    box-shadow: 3px 3px 10px rgba(0,0,0,1);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
 }
 
 .error-popup {
@@ -564,15 +570,19 @@ const goToArtistTrackProfile = () => {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 .error-message {
     font-family: 'Poppins-SemiBold', sans-serif;
     color: red;
 }
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
     opacity: 0;
 }
-
 </style>
