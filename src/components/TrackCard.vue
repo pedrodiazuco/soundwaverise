@@ -100,7 +100,7 @@ const router = useRouter();
 const errorMessage = ref('');
 const waveformRef = ref(null);
 let wavesurfer = null;
-const isReady = ref(false); // Nuevo estado para controlar la disponibilidad de la reproducción
+const isReady = ref(false);
 const isPlaying = ref(false);
 const hasPlayedAtLeastOnce = ref(false);
 const playCount = ref(props.track.plays || 0);
@@ -118,9 +118,7 @@ const userHasCommented = ref(false);
 const commentInput = ref(null);
 const newComment = ref('');
 
-// Computed para verificar si el usuario está logueado
 const isUserLoggedIn = computed(() => !!authStore.currentUser);
-
 
 onMounted( async () => {
     if (isUserLoggedIn.value && props.track && props.track.id) {
@@ -140,7 +138,7 @@ onMounted( async () => {
         cursorColor: 'purple',
         cursorWidth: 4,
         height: 70,
-        barGap: 3 // the optional spacing between bars of the wave, if not provided will be calculated in legacy format
+        barGap: 3
     })
     wavesurfer.on('ready', () => {
         isReady.value = true;
@@ -177,7 +175,7 @@ onMounted( async () => {
 
 watch(() => props.track.audio_url, (newUrl) => {
   if (newUrl) {
-      isReady.value = false; // Resetear el estado de listo cuando cambia la URL
+      isReady.value = false;
       wavesurfer.load(newUrl);
   }
 });
@@ -317,10 +315,10 @@ const goToTrackProfile = () => {
   padding: 20px 40px 25px 40px;
   border-radius: 8px;
   width: 100%;
-  width: calc(60% - 8vh); /* Ajusta esto según necesites */
+  width: calc(60% - 8vh);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  background-size: cover; /* Asegura que la imagen cubra toda el área disponible */
-  background-position: center; /* Centra la imagen en el contenedor */
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
   z-index: 0;
 }
@@ -331,7 +329,7 @@ const goToTrackProfile = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(28, 28, 28, 0.4); /* Añade una capa oscura sobre la imagen para mejorar la legibilidad del texto */
+  background: rgba(28, 28, 28, 0.4);
   background: radial-gradient(transparent, black 98%);
   z-index: 1;
 }
@@ -447,7 +445,7 @@ const goToTrackProfile = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 0 0 0; /* Ajusta el padding para la sección de música */
+  padding: 0px 0 0 0;
 }
 .playback-controls {
   display: flex;
@@ -495,7 +493,7 @@ const goToTrackProfile = () => {
   flex-grow: 1;
   position: relative;
   width: 100%;
-  height: 50px; /* Adjust as per your waveform component */
+  height: 50px;
   padding: 0px 12px 25px 0;
   z-index: 2;
 }
@@ -523,20 +521,20 @@ const goToTrackProfile = () => {
 
 .comment-input-container {
     width: 100%;
-    width: calc(65% - 8vh); /* Ajusta esto según necesites */
+    width: calc(65% - 8vh);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     padding: 10px 0 10px 0;
     flex-direction: row;
-    box-sizing: border-box; /* Asegura que el padding no afecte la anchura */
+    box-sizing: border-box;
 }
 .user-image {
-    width: 40px; /* Tamaño de la imagen del usuario */
-    height: 40px; /* Asegúrate de que la imagen sea circular, si lo deseas */
-    border-radius: 50%; /* Hace la imagen circular */
-    object-fit: cover; /* Asegura que la imagen se cubra correctamente */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
     border: 3px solid #ccc;
     border-radius: 20px;
     filter: drop-shadow(1px 1px 2px rgb(67, 67, 67))

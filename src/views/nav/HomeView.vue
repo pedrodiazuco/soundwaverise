@@ -31,8 +31,8 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { computed, watch, ref } from "vue";
-import { useAuthStore } from "../store/authStore";
-import RecentTracksList from "../components/RecentTracksList.vue";
+import { useAuthStore } from "../../store/authStore";
+import RecentTracksList from "../../components/RecentTracksList.vue";
 const router = useRouter();
 const authStore = useAuthStore();
 const errorMessage = ref('');
