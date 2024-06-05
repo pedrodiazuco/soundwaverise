@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '../store/authStore';
 
 //IMPORTACIONES DE VISTAS
-import HomeView from '../views/HomeView.vue';
+import HomeView from '../views/nav/HomeView.vue';
 import ArtistsView from '../views/nav/ArtistsView.vue';
 import AboutView from '../views/nav/AboutView.vue';
 import FAQView from '../views/nav/FAQView.vue';
